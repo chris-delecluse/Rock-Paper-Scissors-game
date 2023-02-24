@@ -26,16 +26,19 @@ const SelectedView = () => {
         return () => clearTimeout(timer);
     }, [selectedItem]);
 
+    const PlayerGameItem = gameIsWin === "you win" ? <GameItem {...gameItem!} gameIsWin={gameIsWin}/> : <GameItem {...gameItem!} />
+    const IaGameItem = gameIsWin === "you lose" ? <GameItem {...iaGameItem!} gameIsWin={gameIsWin}/> : <GameItem {...iaGameItem!} />
+
     return (
         <div className={"mx-12 flex justify-center"}>
             <div className={"flex flex-col gap-14"}>
                 <div className={"w-96 flex justify-around"}>
                     <div className={"flex flex-col gap-6"}>
-                        <GameItem {...gameItem!} />
+                        {PlayerGameItem}
                         <p className={"text-center text-white uppercase text-xs"}>you picked</p>
                     </div>
                     <div className={"flex flex-col gap-6"}>
-                        {isLoading ? <GameItemSkeleton/> : <GameItem {...iaGameItem!} />}
+                        {isLoading ? <GameItemSkeleton/> : IaGameItem}
                         <p className={"text-center text-white uppercase text-xs"}>the house picked</p>
                     </div>
                 </div>
